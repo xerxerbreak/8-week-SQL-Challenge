@@ -8,7 +8,7 @@ Throughout this challenge, I’ve also gained new skills such as using Common Ta
 
 | Case Study | Description |
 |------------|-------------|
-|Case Study #1: Danny’s Diner(https://github.com/xerxerbreak/8-week-SQL-Challenge/blob/main/Case%20Study%20%231%20-%20Danny's%20Diner/README.md) | Analyze customer behavior and product performance for a small restaurant. |
+|[Case Study #1: Danny’s Diner](https://github.com/xerxerbreak/8-week-SQL-Challenge/blob/main/Case%20Study%20%231%20-%20Danny's%20Diner/README.md) | Analyze customer behavior and product performance for a small restaurant. |
 |Case Study #2: Pizza Runner | Dive into operations and performance metrics for a pizza delivery startup. |
 |Case Study #3: Foodie-Fi ||
 |Case Study #4: Data Bank ||
