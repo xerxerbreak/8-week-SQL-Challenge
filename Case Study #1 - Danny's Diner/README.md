@@ -24,7 +24,12 @@ Danny is looking to better understand his customers by analyzing data on their v
 
 ## Questions and Solutions
 1. What is the total amount each customer spent at the restaurant?
-
+````
+SELECT s.customer_id,sum(m.price) total_amount_spent
+FROM sales s JOIN menu m on m.product_id = s.product_id
+GROUP BY s.customer_id
+ORDER BY s.customer_id ASC;
+````
 2. How many days has each customer visited the restaurant?
 
 3. What was the first item from the menu purchased by each customer?
