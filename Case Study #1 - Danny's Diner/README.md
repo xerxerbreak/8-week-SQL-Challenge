@@ -142,16 +142,29 @@ ORDER BY s.customer_Id;
 1. Join All The Things
 Recreate the table with: customer_id, order_date, product_name, price, member (Y/N)
 ````
-SELECT s.customer_id,sum(m.price) total_amount_spent
-FROM sales s JOIN menu m on m.product_id = s.product_id
-GROUP BY s.customer_id
-ORDER BY s.customer_id ASC;
+SELECT s.customer_id,s.order_date,me.product_name,me.price, 
+CASE 
+	WHEN s.order_date >= m.join_date THEN 'Y' ELSE 'N' END AS member
+FROM sales s
+LEFT JOIN menu me ON s.product_id = me.product_id
+LEFT JOIN members m ON m.customer_id = s.customer_id
+ORDER BY s.customer_id,member
 ````
 2. Rank All The Things
 Danny also requires further information about the ```ranking``` of customer products, but he purposely does not need the ranking for non-member purchases so he expects null ```ranking``` values for the records when customers are not yet part of the loyalty program.
 ````
-SELECT s.customer_id,sum(m.price) total_amount_spent
-FROM sales s JOIN menu m on m.product_id = s.product_id
-GROUP BY s.customer_id
-ORDER BY s.customer_id ASC;
+WITH member_cte AS (
+SELECT s.customer_id,s.order_date,me.product_name,me.price, 
+CASE 
+	WHEN s.order_date >= m.join_date THEN 'Y' ELSE 'N' END AS member
+FROM sales s
+LEFT JOIN menu me ON s.product_id = me.product_id
+LEFT JOIN members m ON m.customer_id = s.customer_id
+)
+SELECT *,
+CASE 
+	WHEN member = 'N' THEN NULL
+	ELSE RANK() OVER(Partition BY customer_id,member ORDER BY order_date
+	)END AS ranking
+FROM member_cte
 ````
