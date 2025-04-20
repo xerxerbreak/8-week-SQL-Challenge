@@ -18,16 +18,3 @@ Throughout this challenge, I’ve also gained new skills such as using Common Ta
 |Case Study #8: Fresh Segments ||
 
 > ✅ Currently working on: **Case Study #2 – Danny’s Diner**
-
-## 🛠️ Skills Used
-
-- PostgreSQL
-- Window Functions
-- CTEs & Subqueries
-- Aggregations & Grouping
-- Joins (INNER, LEFT, RIGHT, FULL)
-- Data Cleaning & Transformation
-- Analytical Thinking
-
-## 📂 Folder Structure
-
