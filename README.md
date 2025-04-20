@@ -1,6 +1,6 @@
 # 🍜 8 Week SQL Challenge
 
-Welcome! This repository contains my solutions to the 8 Week SQL Challenge by Danny Ma. This project demonstrates my ability to tackle a variety of SQL challenges, showcasing my proficiency in SQL writing, problem-solving, and analytical thinking. 
+Welcome! This repository contains my solutions to the 8 Week SQL Challenge by [Danny Ma](https://www.linkedin.com/company/datawithdanny/). This project demonstrates my ability to tackle a variety of SQL challenges, showcasing my proficiency in SQL writing, problem-solving, and analytical thinking. 
 
 Throughout this challenge, I’ve also gained new skills such as using Common Table Expressions (CTEs) to write more organized and readable queries.
 
