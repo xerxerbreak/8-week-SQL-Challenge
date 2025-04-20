@@ -1,6 +1,6 @@
 
 CREATE SCHEMA dannys_diner;
-SET search_path = dannys_diner; --WHENEVER YOU START UP PGADMIN BE SURE TO EXECUTE THIS LINE TO LET THE CODE KNOWS
+SET search_path = dannys_diner;
 
 CREATE TABLE sales (
   "customer_id" VARCHAR(1),
