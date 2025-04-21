@@ -23,6 +23,8 @@ Danny is looking to better understand his customers by analyzing data on their v
 ***
 
 ## Questions and Solutions
+
+
 1. What is the total amount each customer spent at the restaurant?
 ````
 SELECT s.customer_id,sum(m.price) total_amount_spent
@@ -30,6 +32,15 @@ FROM sales s JOIN menu m on m.product_id = s.product_id
 GROUP BY s.customer_id
 ORDER BY s.customer_id ASC;
 ````
+## Answer:
+| customer_id | total_amount_spent |
+| ----------- | ----------- |
+| A           | 76          |
+| B           | 74          |
+| C           | 36          |
+
+***
+
 2. How many days has each customer visited the restaurant?
 ````
 SELECT customer_id, count(DISTINCT(order_date)) total_visits
@@ -37,6 +48,15 @@ FROM sales
 GROUP BY customer_id
 ORDER BY customer_id;
 ````
+## Answer:
+| customer_id | total_visits |
+| ----------- | ----------- |
+| A           | 4          |
+| B           | 6          |
+| C           | 2          |
+
+***
+
 3. What was the first item from the menu purchased by each customer?
 ````
 WITH ranked_orders AS (
@@ -50,6 +70,16 @@ FROM ranked_orders
 WHERE rank = 1
 GROUP BY customer_Id,product_name;
 ````
+#### Answer:
+| customer_id | product_name | 
+| ----------- | ----------- |
+| A           | curry        | 
+| A           | sushi        | 
+| B           | curry        | 
+| C           | ramen        |
+
+  ***
+  
 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
 ````
 SELECT m.product_name, count(s.product_id) as most_purchased_item
@@ -58,6 +88,14 @@ GROUP BY m.product_name
 ORDER BY most_purchased_item desc
 LIMIT 1;
 ````
+
+#### Answer:
+| product_name | most_purchased_item | 
+| ----------- | ----------- |
+|ramen           |8       |
+
+  ***
+  
 5. Which item was the most popular for each customer?
 ````
 WITH most_popular AS (
@@ -73,6 +111,18 @@ SELECT customer_id,product_name,order_count
 FROM most_popular
 WHERE rank = 1;
 ````
+
+#### Answer:
+| customer_id | product_name | order_count |
+| ----------- | ---------- |------------  |
+| A           | ramen        |  3   |
+| B           | sushi        |  2   |
+| B           | curry        |  2   |
+| B           | ramen        |  2   |
+| C           | ramen        |  3   |
+
+***
+
 6. Which item was purchased first by the customer after they became a member?
 ````
 WITH first_purchase AS (
@@ -88,6 +138,15 @@ JOIN menu ON first_purchase.product_id = menu.product_id
 WHERE rank = 1
 ORDER BY customer_id;
 ````
+
+#### Answer:
+| customer_id | join_date | order_date | product_name |
+| ----------- | ---------- | ---------- | ---------- |
+| A           | 2021-01-07 | 2021-01-10| ramen        |
+| B           | 2021-01-09 | 2021-01-11| sushi        |
+
+***
+
 7. Which item was purchased just before the customer became a member?
 ````
 WITH first_purchase AS (
@@ -103,6 +162,15 @@ JOIN menu ON first_purchase.product_id = menu.product_id
 WHERE rank = 1
 ORDER BY customer_id;
 ````
+
+#### Answer:
+| customer_id | join_date | order_date | product_name |
+| ----------- | ---------- | ---------- | ---------- |
+| A           | 2021-01-07 | 2021-01-01| sushi        |
+| B           | 2021-01-09 | 2021-01-04| sushi        |
+
+***
+
 8. What is the total items and amount spent for each member before they became a member?
 ````
 SELECT s.customer_id, sum(me.price) as total_spent, count(s.product_id) as total_items
@@ -112,6 +180,14 @@ JOIN members m ON s.customer_id = m.customer_Id AND s.order_date < m.join_date
 GROUP BY s.customer_Id
 ORDER BY s.customer_Id;
 ````
+#### Answer:
+| customer_id | total_spent | total_items |
+| ----------- | ---------- |----------  |
+| A           | 25 |  2       |
+| B           | 40 |  3       |
+
+***
+
 9. If each $1 spent equates to 10 points and sushi has a 2x points multiplier — how many points would each customer have?
 ````
 WITH points_cte AS (
@@ -129,6 +205,16 @@ JOIN points_cte ON s.product_Id = points_cte.product_id
 GROUP BY s.customer_id
 ORDER BY s.customer_id;
 ````
+
+#### Answer:
+| customer_id | total_points |
+| ----------- | ---------- |
+| A           | 860 |
+| B           | 940 |
+| C           | 360 |
+
+***
+
 10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi — how many points do customer A and B have at the end of January?
 ````
 SELECT s.customer_id, sum(me.price) as total_spent, count(s.product_id) as total_items
@@ -138,6 +224,15 @@ JOIN members m ON s.customer_id = m.customer_Id AND s.order_date < m.join_date
 GROUP BY s.customer_Id
 ORDER BY s.customer_Id;
 ````
+
+#### Answer:
+| customer_id | total_points |
+| ----------- | ---------- |
+| A           | 1370 |
+| B           | 820 |
+
+***
+
 ## BONUS QUESTIONS
 1. Join All The Things
 Recreate the table with: customer_id, order_date, product_name, price, member (Y/N)
